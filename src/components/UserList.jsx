@@ -12,23 +12,38 @@ const UserList = () => {
 			<Container>
 				
 				{!!users.length && (
-					<span className={styles.usersQuantity}>
-						{users.length} user(s)
-					</span>
+					<div className={styles.userListActions}>
+						<div className={styles.userListActionsButtons}>
+							<button disabled>Delete</button>
+							<button disabled>Sort By Name</button>
+						</div>
+						<span className={styles.usersQuantity}>
+							{users.length} user(s)
+						</span>
+					</div>
 				)}
 
 				{!!users.length && (
-					users.map((user, index) => (
+					users.map((user) => (
 						<ul key={user.id}>
 
 							<li className={styles.userInfo}>
 
 								<div className={styles.userInfoGroup}>
-									
-									<div>{index + 1}. {user.firstName} {user.lastName}</div>
+									<input type="checkbox" />
+									<div>{user.firstName} {user.lastName}</div>
+									<div>{user.email}</div>
+									<div>{user.tel}</div>
+
+									<div>
+										<span>0</span>
+										<span>0</span>
+										<span>0</span>
+									</div>
 								</div>
 
 							</li>
+
 						</ul>
 					)))
 				}

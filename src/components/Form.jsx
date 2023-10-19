@@ -2,26 +2,39 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/slices/usersSlice';
 import { createUserWithID } from './utils/createUserWithID';
+import { randomUsers } from './data/users';
 import styles from './Form.module.scss';
 import Container from './layout/Container';
 
 const Form = () => {
 
-	const [userData, setUserData] = useState({ firstName: '', lastName: '' });
+	const [userData, setUserData] = useState({ firstName: '', lastName: '', email: '', tel: '' });
 	const dispatch = useDispatch();
+
+	const completedUserData = 
+		userData.firstName && 
+		userData.lastName && 
+		userData.email && 
+		userData.tel;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (userData.firstName && userData.lastName) {
+		if (completedUserData) {
 			dispatch(addUser(createUserWithID(userData)));
-			setUserData({ firstName: '', lastName: '' });
+			setUserData({ firstName: '', lastName: '', email: '', tel: '' });
 		}
 	};
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setUserData((prevData) => ({...prevData, [name]: value}));
+	}
+
+	const handleAddRandomUser = () => {
+		const randomIndex = Math.floor(Math.random() * randomUsers.length);
+		const randomUser = randomUsers[randomIndex];
+		dispatch(addUser(randomUser));
 	}
 
 	return (
@@ -50,11 +63,38 @@ const Form = () => {
 							/>
 						</div>
 
+						<div className={styles.formGroup}>
+							<input 
+								type='email'
+								name='email'
+								placeholder='Enter e-mail...' 
+								value={userData.email}
+								onChange={handleInputChange}
+							/>
+						</div>
+
+						<div className={styles.formGroup}>
+							<input 
+								type='tel'
+								name='tel'
+								placeholder='Enter a phone number...' 
+								value={userData.tel}
+								onChange={handleInputChange}
+							/>
+						</div>
+
 						<button 
 							className={styles.fromBtn} 
 							type='submit' 
 						>
 							Add User
+						</button>
+
+						<button 
+							className={styles.fromBtn}
+							onClick={handleAddRandomUser} 
+						>
+							Add Random User
 						</button>
 
 					</div>
