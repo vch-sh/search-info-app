@@ -1,0 +1,25 @@
+.userList {
+
+}
+
+.usersQuantity {
+	font-size: 1.2em;
+}
+
+li {
+	list-style: none;
+}
+
+.userInfo {
+	margin-top: 10px;
+	display: flex;
+	gap: 20px;
+
+	background-color: rgb(213, 230, 245);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.table > thead > td > th {
+	width: 150px;
+}

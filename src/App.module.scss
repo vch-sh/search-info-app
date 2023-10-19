@@ -1,0 +1,14 @@
+@use './scss/variables.scss';
+
+.app {
+	display: flex;
+	flex-direction: column;
+
+	& h1 {
+		text-align: center;
+		margin-bottom: 2em;
+		padding: 1.25rem 0;
+		background-color: cornflowerblue;
+		color: variables.$title-color;
+	}
+}
