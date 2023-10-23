@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RiDeleteBin2Line} from 'react-icons/ri';
 import { BiEdit } from 'react-icons/bi';
 import { 
 	selectUsers, 
 	clearTheList, 
-	deleteUser 
+	deleteUser,
+	sortAscending
 } from '../redux/slices/usersSlice';
 import Input from '../ui/CustomInput';
 import Button from '../ui/CustomButon';
@@ -12,6 +14,8 @@ import styles from './UserList.module.scss';
 import Container from './layout/Container';
 
 const UserList = () => {
+
+	const [isAscending, setIsAscending] = useState(false);
 
 	const dispatch = useDispatch();
 	const users = useSelector(selectUsers);
@@ -25,8 +29,12 @@ const UserList = () => {
 	}
 
 	const handleDeleteUser = (userID) => {
-		console.log(userID);
 		dispatch(deleteUser(userID));
+	}
+
+	const handleSortAscending = () => {
+		dispatch(sortAscending());
+		setIsAscending(!isAscending);
 	}
 
 	return (
@@ -38,7 +46,7 @@ const UserList = () => {
 					<div className={styles.userListActions}>
 						<div className={styles.userListActionsButtons}>
 							<Button onClick={handleClearTheList}>Clear the list</Button>
-							<Button>Sort by name</Button>
+							<Button onClick={handleSortAscending}>Sort by alphabet</Button>
 							<Input type="text" placeholder='Quick search by name...' />
 						</div>
 						<span className={styles.usersQuantity}>
