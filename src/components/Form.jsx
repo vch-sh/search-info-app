@@ -3,26 +3,28 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/slices/usersSlice';
 import { createUserWithID } from './utils/createUserWithID';
 import { randomUsers } from './data/users';
+import Input from '../ui/CustomInput';
+import Button from '../ui/CustomButon';
 import styles from './Form.module.scss';
 import Container from './layout/Container';
 
 const Form = () => {
 
-	const [userData, setUserData] = useState({ firstName: '', lastName: '', email: '', tel: '' });
+	const [userData, setUserData] = useState({ firstName: '', lastName: '', email: '', phone: '' });
 	const dispatch = useDispatch();
 
 	const completedUserData = 
 		userData.firstName && 
 		userData.lastName && 
 		userData.email && 
-		userData.tel;
+		userData.phone;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (completedUserData) {
 			dispatch(addUser(createUserWithID(userData)));
-			setUserData({ firstName: '', lastName: '', email: '', tel: '' });
+			setUserData({ firstName: '', lastName: '', email: '', phone: '' });
 		}
 	};
 
@@ -32,9 +34,11 @@ const Form = () => {
 	}
 
 	const handleAddRandomUser = () => {
-		const randomIndex = Math.floor(Math.random() * randomUsers.length);
-		const randomUser = randomUsers[randomIndex];
-		dispatch(addUser(randomUser));
+		if (randomUsers.length > 0) {
+			const randomIndex = Math.floor(Math.random() * randomUsers.length);
+			const randomUser = randomUsers.pop(randomUsers[randomIndex]);
+			dispatch(addUser(randomUser));
+		}
 	}
 
 	return (
@@ -42,9 +46,9 @@ const Form = () => {
 			<Container>
 				<form onSubmit={handleSubmit}>
 
-					<div className={styles.formGroups}>
-						<div className={styles.formGroup}>
-							<input 
+					<div className={styles.inputGroup}>
+						<div>
+							<Input 
 								type='text' 
 								name='firstName'
 								placeholder='Enter first name...' 
@@ -53,8 +57,8 @@ const Form = () => {
 							/>
 						</div>
 
-						<div className={styles.formGroup}>
-							<input 
+						<div>
+							<Input 
 								type='text'
 								name='lastName'
 								placeholder='Enter last name...' 
@@ -63,8 +67,8 @@ const Form = () => {
 							/>
 						</div>
 
-						<div className={styles.formGroup}>
-							<input 
+						<div>
+							<Input 
 								type='email'
 								name='email'
 								placeholder='Enter e-mail...' 
@@ -73,34 +77,32 @@ const Form = () => {
 							/>
 						</div>
 
-						<div className={styles.formGroup}>
-							<input 
+						<div>
+							<Input 
 								type='tel'
-								name='tel'
+								name='phone'
 								placeholder='Enter a phone number...' 
-								value={userData.tel}
+								value={userData.phone}
 								onChange={handleInputChange}
 							/>
 						</div>
+					</div>
 
-						<button 
-							className={styles.fromBtn} 
+					<div className={styles.buttonGroup}>
+						<Button 
 							type='submit' 
 						>
 							Add User
-						</button>
+						</Button>
 
-						<button 
-							className={styles.fromBtn}
+						<Button 
+							type='submit'
 							onClick={handleAddRandomUser} 
 						>
 							Add Random User
-						</button>
-
+						</Button>
 					</div>
-					
-
-
+				
 				</form>
 
 			</Container>

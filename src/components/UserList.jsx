@@ -1,10 +1,33 @@
-import { useSelector } from 'react-redux';
-import { selectUsers } from '../redux/slices/usersSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { RiDeleteBin2Line} from 'react-icons/ri';
+import { BiEdit } from 'react-icons/bi';
+import { 
+	selectUsers, 
+	clearTheList, 
+	deleteUser 
+} from '../redux/slices/usersSlice';
+import Input from '../ui/CustomInput';
+import Button from '../ui/CustomButon';
 import styles from './UserList.module.scss';
 import Container from './layout/Container';
 
 const UserList = () => {
+
+	const dispatch = useDispatch();
 	const users = useSelector(selectUsers);
+
+	const deleteSpaces = (inputData) => {
+		return String(inputData).replace(/\s/g, '');
+	}
+
+	const handleClearTheList = () => {
+		dispatch(clearTheList());
+	}
+
+	const handleDeleteUser = (userID) => {
+		console.log(userID);
+		dispatch(deleteUser(userID));
+	}
 
 	return (
 		<div className={styles.userList}>
@@ -14,8 +37,9 @@ const UserList = () => {
 				{!!users.length && (
 					<div className={styles.userListActions}>
 						<div className={styles.userListActionsButtons}>
-							<button disabled>Delete</button>
-							<button disabled>Sort By Name</button>
+							<Button onClick={handleClearTheList}>Clear the list</Button>
+							<Button>Sort by name</Button>
+							<Input type="text" placeholder='Quick search by name...' />
 						</div>
 						<span className={styles.usersQuantity}>
 							{users.length} user(s)
@@ -30,15 +54,15 @@ const UserList = () => {
 							<li className={styles.userInfo}>
 
 								<div className={styles.userInfoGroup}>
-									<input type="checkbox" />
 									<div>{user.firstName} {user.lastName}</div>
 									<div>{user.email}</div>
-									<div>{user.tel}</div>
+									<div>{deleteSpaces(user.phone)}</div>
 
-									<div>
-										<span>0</span>
-										<span>0</span>
-										<span>0</span>
+									<div className={styles.userActions}>
+										<span><BiEdit className={styles.userActionsIcon}/></span>
+										<span onClick={() => handleDeleteUser(user.id)}>
+											<RiDeleteBin2Line className={styles.userActionsIcon} />
+										</span>
 									</div>
 								</div>
 
@@ -49,7 +73,6 @@ const UserList = () => {
 				}
 
 			</Container>
-
 
 		</div>
 	)
