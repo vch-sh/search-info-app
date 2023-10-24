@@ -1,10 +1,12 @@
+@use '../scss/variables';
+
 .button {
-	max-width: 100%;
-	padding: 0.6em;
-	font-size: 1.1em;
-	border: none;
-	background-color: #64edac;
-	border-radius: 0.7em;
+	max-width: variables.$custom-button-max-width;
+	padding: variables.$custom-button-padding;
+	font-size: variables.$custom-button-font-size;
+	border: variables.$custom-button-border;
+	border-radius: variables.$custom-button-border-radius;
+	background-color: variables.$custom-button-background-color;
 	transition: all .1s;
 	cursor: pointer;
 

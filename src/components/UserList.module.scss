@@ -1,3 +1,5 @@
+@use '../scss/variables';
+
 .userList {
 
 }
@@ -5,6 +7,8 @@
 .userListActions{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
 }
 
 .userListActionsButtons {
@@ -13,7 +17,7 @@
 }
 
 .usersQuantity {
-	font-size: 1.2em;
+	font-size: variables.$users-quantity-font-size;
 }
 
 li {
@@ -23,7 +27,7 @@ li {
 .userInfo {
 	margin-top: 5px;
 
-	background-color: #d5e6f5;
+	background-color: variables.$user-info-background-color;
 	padding: 10px;
 	border-radius: 10px;
 }
@@ -31,22 +35,26 @@ li {
 .userInfoGroup {
 	display: flex;
 	align-items: center;
-	font-size: 1.1em;
+	font-size: variables.$user-info-group-font-size;
 
 	& div {
 		flex: 1;
 		text-align: center;
+	}
+
+	& div:first-child {
+		font-weight: 700;
 	}
 }
 
 .userActions {
 	display: flex;
 	justify-content: center;
-	gap: 10px;
+	gap: 20px;
 }
 
 .userActionsIcon {
-	font-size: 1.2em;
+	font-size: variables.$user-actions-icon-font-size;
 
 	&:hover {
 		cursor: pointer;

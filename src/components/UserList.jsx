@@ -8,6 +8,10 @@ import {
 	deleteUser,
 	sortAscending
 } from '../redux/slices/usersSlice';
+import { 
+	selectFullNameFilter, 
+	setFullNameFilter 
+} from '../redux/slices/filterSlice';
 import Input from '../ui/CustomInput';
 import Button from '../ui/CustomButon';
 import styles from './UserList.module.scss';
@@ -19,6 +23,7 @@ const UserList = () => {
 
 	const dispatch = useDispatch();
 	const users = useSelector(selectUsers);
+	const fullNameFilter = useSelector(selectFullNameFilter);
 
 	const deleteSpaces = (inputData) => {
 		return String(inputData).replace(/\s/g, '');
@@ -37,6 +42,15 @@ const UserList = () => {
 		setIsAscending(!isAscending);
 	}
 
+	const handleFullNameFulterChange = (e) => {
+		dispatch(setFullNameFilter(e.target.value));
+	}
+
+	const filteredUsers = users.filter((user) => {
+		const fullName = user.firstName + user.lastName;
+		return fullName.toLowerCase().includes(fullNameFilter.toLowerCase());
+	});
+
 	return (
 		<div className={styles.userList}>
 
@@ -47,16 +61,21 @@ const UserList = () => {
 						<div className={styles.userListActionsButtons}>
 							<Button onClick={handleClearTheList}>Clear the list</Button>
 							<Button onClick={handleSortAscending}>Sort by alphabet</Button>
-							<Input type="text" placeholder='Quick search by name...' />
+							<Input 
+								type="text" 
+								placeholder='Quick search by name...' 
+								value={fullNameFilter}
+								onChange={handleFullNameFulterChange}
+							/>
 						</div>
 						<span className={styles.usersQuantity}>
-							{users.length} user(s)
+							{filteredUsers.length} user(s)
 						</span>
 					</div>
 				)}
 
 				{!!users.length && (
-					users.map((user) => (
+					filteredUsers.map((user) => (
 						<ul key={user.id}>
 
 							<li className={styles.userInfo}>

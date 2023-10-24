@@ -1,7 +1,10 @@
+@use '../scss/variables';
+
 .input {
-	border: none;
-	border-radius: 0.5em;
-	padding: 0.5em;
-	width: 290px;
-	font-size: 1.1em;
+	border: variables.$custom-input-border;
+	border-radius: variables.$custom-input-border-radius;
+	padding: variables.$custom-input-padding;
+	width: variables.$custom-input-width;
+	font-size: variables.$custom-input-font-size;
+	box-shadow: variables.$custom-input-box-shadow;
 }
