@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RiDeleteBin2Line} from 'react-icons/ri';
-import { BiEdit } from 'react-icons/bi';
 import { 
 	selectUsers, 
 	clearTheList, 
@@ -63,7 +62,7 @@ const UserList = () => {
 							<Button onClick={handleSortAscending}>Sort by alphabet</Button>
 							<Input 
 								type="text" 
-								placeholder='Quick search by name...' 
+								placeholder='Search by name...' 
 								value={fullNameFilter}
 								onChange={handleFullNameFulterChange}
 							/>
@@ -86,7 +85,6 @@ const UserList = () => {
 									<div>{deleteSpaces(user.phone)}</div>
 
 									<div className={styles.userActions}>
-										<span><BiEdit className={styles.userActionsIcon}/></span>
 										<span onClick={() => handleDeleteUser(user.id)}>
 											<RiDeleteBin2Line className={styles.userActionsIcon} />
 										</span>

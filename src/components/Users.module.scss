@@ -1,3 +1,9 @@
 .users {
-	
+	margin-bottom: 30px;
+}
+
+@media (max-width: 800px) {
+	.users {
+		margin-bottom: 15px;
+	}
 }

@@ -1,9 +1,5 @@
 @use '../scss/variables';
 
-.userList {
-
-}
-
 .userListActions{
 	display: flex;
 	justify-content: space-between;
@@ -58,5 +54,31 @@ li {
 
 	&:hover {
 		cursor: pointer;
+	}
+}
+
+@media (max-width: 1200px) {
+	.userListActions {
+		flex-wrap: wrap;
+	}
+}
+
+@media (max-width: 800px) {
+	.userListActions {
+		justify-content: center;
+	}
+	.userListActionsButtons {
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+		padding: 0;
+		gap: 20px;
+	}
+	.usersQuantity {
+		margin-top: 20px;
+	}
+	.userInfoGroup {
+		flex-direction: column;
+		gap: 10px;
 	}
 }
