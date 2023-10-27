@@ -1,6 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setError } from "./errorSlice";
+import { createUserWithID } from "../../components/utils/createUserWithID";
 
 const initialState = [];
+
+export const fetchUsers = createAsyncThunk(
+	'users/fetchUsers',
+	async (url, thunkAPI) => {
+		try {
+			const res = await fetch(url);
+			const usersData = await res.json();
+			if (usersData.users.length > 0) {
+				const randomIndex = Math.floor(Math.random() * usersData.users.length);
+				const randomUser = usersData.users[randomIndex];
+				thunkAPI.dispatch(addUser(createUserWithID(randomUser)));
+			}
+		} catch (error) {
+			thunkAPI.dispatch(setError(error.message));
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+)
 
 const usersSlice = createSlice({
 	name: 'users',
@@ -29,7 +49,12 @@ const usersSlice = createSlice({
 
 				return 0;
 			});
-		}
+		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(fetchUsers.fulfilled, (state, action) => {
+			return action.payload;
+		}); 
 	}
 });
 

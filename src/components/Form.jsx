@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { addUser } from '../redux/slices/usersSlice';
 import { createUserWithID } from './utils/createUserWithID';
 import { randomUsers } from './data/users';
+import { fetchUsers } from '../redux/slices/usersSlice';
 import Input from '../ui/CustomInput';
 import Button from '../ui/CustomButon';
 import styles from './Form.module.scss';
@@ -20,14 +21,14 @@ const Form = () => {
 		userData.email && 
 		userData.phone;
 
-	const handleAdduser = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (completedUserData) {
 			dispatch(addUser(createUserWithID(userData)));
 			setUserData({ firstName: '', lastName: '', email: '', phone: '' });
 		} else {
-			toast.info('Please, fill in all the inputs!')
+			toast.info('Please, fill in all the input fields!')
 		}
 	};
 
@@ -36,14 +37,16 @@ const Form = () => {
 		setUserData((prevData) => ({...prevData, [name]: value}));
 	}
 
-	const handleAddRandomUser = (e) => {
-		e.preventDefault();
-
+	const handleAddRandomUser = () => {
 		if (randomUsers.length > 0) {
 			const randomIndex = Math.floor(Math.random() * randomUsers.length);
 			const randomUser = randomUsers.pop(randomUsers[randomIndex]);
 			dispatch(addUser(randomUser));
 		}
+	}
+
+	const handleAddRandomUserViaAPI = () => {
+		dispatch(fetchUsers('https://dummyjson.com/users/?limit=0'));
 	}
 
 	return (
@@ -96,16 +99,23 @@ const Form = () => {
 					<div className={styles.buttonGroup}>
 						<Button 
 							type='submit' 
-							onClick={handleAdduser}
+							onClick={handleSubmit}
 						>
 							Add User
 						</Button>
 
 						<Button 
-							type='submit'
+							type='button'
 							onClick={handleAddRandomUser} 
 						>
 							Add Random User
+						</Button>
+
+						<Button 
+							type='button'
+							onClick={handleAddRandomUserViaAPI} 
+						>
+							Add Random User (API)
 						</Button>
 					</div>
 				
