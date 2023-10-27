@@ -20,14 +20,14 @@ const Form = () => {
 		userData.email && 
 		userData.phone;
 
-	const handleSubmit = (e) => {
+	const handleAdduser = (e) => {
 		e.preventDefault();
 
 		if (completedUserData) {
 			dispatch(addUser(createUserWithID(userData)));
 			setUserData({ firstName: '', lastName: '', email: '', phone: '' });
 		} else {
-			toast.info('Please, fill in all the input fields.')
+			toast.info('Please, fill in all the inputs!')
 		}
 	};
 
@@ -36,7 +36,9 @@ const Form = () => {
 		setUserData((prevData) => ({...prevData, [name]: value}));
 	}
 
-	const handleAddRandomUser = () => {
+	const handleAddRandomUser = (e) => {
+		e.preventDefault();
+
 		if (randomUsers.length > 0) {
 			const randomIndex = Math.floor(Math.random() * randomUsers.length);
 			const randomUser = randomUsers.pop(randomUsers[randomIndex]);
@@ -47,7 +49,7 @@ const Form = () => {
 	return (
 		<div className={styles.form}>
 			<Container>
-				<form onSubmit={handleSubmit}>
+				<form>
 
 					<div className={styles.inputGroup}>
 						<div>
@@ -94,6 +96,7 @@ const Form = () => {
 					<div className={styles.buttonGroup}>
 						<Button 
 							type='submit' 
+							onClick={handleAdduser}
 						>
 							Add User
 						</Button>
