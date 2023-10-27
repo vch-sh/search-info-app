@@ -1,4 +1,4 @@
-## [Search Info App](https://vch-sh.github.io/search-info-app/) 
+## [Search Info App (responsive)](https://vch-sh.github.io/search-info-app/) 
 **Ctrl/Command** + click to open a link in a new window
 
 Search Info App is a web application built with React and Redux that allows users to search, add, and manage user information. Users can input a person's first name, last name, email, and phone number, and the app provides features to add random users, sort users alphabetically, and search for users by name.
@@ -20,6 +20,10 @@ Search Info App is a web application built with React and Redux that allows user
 * **Search and Filtering**: I provided a search input for users to filter the displayed user list by name. The app also supports sorting users in ascending order by their first names.
 
 * **Styling with SCSS**: I used SCSS (Sass) to style the app's components, resulting in more organized and maintainable CSS code. This approach allowed for features like variables and nesting.
+
+* **Responsive Design**: The Search Info App adapts to various screen sizes and devices, ensuring a user-friendly experience whether you're accessing it on a desktop, tablet, or mobile device. The responsive design allows users to manage their information comfortably, regardless of the device they are using.
+
+This responsive approach enhances the accessibility and usability of the app, making it versatile and user-centric.
 
 * **UUID Generation**: I generated unique identifiers (UUIDs) for each user using the uuid library, ensuring each user has a distinct ID.
 
