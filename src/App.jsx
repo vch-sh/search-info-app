@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Users from './components/Users';
+import Error from './components/Error';
 import styles from './App.module.scss';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <h1>Search Info App</h1>
           <Users />
       </div>
+      <Error />
     </Provider>
   );
 }

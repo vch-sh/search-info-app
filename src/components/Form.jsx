@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { addUser } from '../redux/slices/usersSlice';
 import { createUserWithID } from './utils/createUserWithID';
 import { randomUsers } from './data/users';
@@ -25,6 +26,8 @@ const Form = () => {
 		if (completedUserData) {
 			dispatch(addUser(createUserWithID(userData)));
 			setUserData({ firstName: '', lastName: '', email: '', phone: '' });
+		} else {
+			toast.info('Please, fill in all the input fields.')
 		}
 	};
 
