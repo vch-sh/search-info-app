@@ -21,9 +21,7 @@ Search Info App is a web application built with React and Redux that allows user
 
 * **Styling with SCSS**: I used SCSS (Sass) to style the app's components, resulting in more organized and maintainable CSS code. This approach allowed for features like variables and nesting.
 
-* **Responsive Design**: The Search Info App adapts to various screen sizes and devices, ensuring a user-friendly experience whether you're accessing it on a desktop, tablet, or mobile device. The responsive design allows users to manage their information comfortably, regardless of the device they are using.
-
-This responsive approach enhances the accessibility and usability of the app, making it versatile and user-centric.
+* **Responsive Design**: The Search Info App adapts to various screen sizes and devices, ensuring a user-friendly experience whether you're accessing it on a desktop, tablet, or mobile device. The responsive design allows users to manage their information comfortably, regardless of the device they are using. This responsive approach enhances the accessibility and usability of the app, making it versatile and user-centric.
 
 * **UUID Generation**: I generated unique identifiers (UUIDs) for each user using the uuid library, ensuring each user has a distinct ID.
 
