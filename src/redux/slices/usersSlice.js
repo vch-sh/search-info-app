@@ -46,7 +46,6 @@ const usersSlice = createSlice({
 				if (nameA > nameB) {
 					return 1;
 				}
-
 				return 0;
 			});
 		},

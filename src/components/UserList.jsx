@@ -17,7 +17,6 @@ import styles from './UserList.module.scss';
 import Container from './layout/Container';
 
 const UserList = () => {
-
 	const [isAscending, setIsAscending] = useState(false);
 
 	const dispatch = useDispatch();
@@ -52,9 +51,7 @@ const UserList = () => {
 
 	return (
 		<div className={styles.userList}>
-
 			<Container>
-				
 				{!!users.length && (
 					<div className={styles.userListActions}>
 						<div className={styles.userListActionsButtons}>
@@ -76,29 +73,22 @@ const UserList = () => {
 				{!!users.length && (
 					filteredUsers.map((user) => (
 						<ul key={user.id}>
-
 							<li className={styles.userInfo}>
-
 								<div className={styles.userInfoGroup}>
 									<div>{user.firstName} {user.lastName}</div>
 									<div>{user.email}</div>
 									<div>{deleteSpaces(user.phone)}</div>
-
 									<div className={styles.userActions}>
 										<span onClick={() => handleDeleteUser(user.id)}>
 											<RiDeleteBin2Line className={styles.userActionsIcon} />
 										</span>
 									</div>
 								</div>
-
 							</li>
-
 						</ul>
 					)))
 				}
-
 			</Container>
-
 		</div>
 	)
 }

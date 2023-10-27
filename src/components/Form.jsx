@@ -11,7 +11,6 @@ import styles from './Form.module.scss';
 import Container from './layout/Container';
 
 const Form = () => {
-
 	const [userData, setUserData] = useState({ firstName: '', lastName: '', email: '', phone: '' });
 	const dispatch = useDispatch();
 
@@ -53,7 +52,6 @@ const Form = () => {
 		<div className={styles.form}>
 			<Container>
 				<form>
-
 					<div className={styles.inputGroup}>
 						<div>
 							<Input 
@@ -64,7 +62,6 @@ const Form = () => {
 								onChange={handleInputChange}
 							/>
 						</div>
-
 						<div>
 							<Input 
 								type='text'
@@ -74,7 +71,6 @@ const Form = () => {
 								onChange={handleInputChange}
 							/>
 						</div>
-
 						<div>
 							<Input 
 								type='email'
@@ -84,7 +80,6 @@ const Form = () => {
 								onChange={handleInputChange}
 							/>
 						</div>
-
 						<div>
 							<Input 
 								type='tel'
@@ -95,7 +90,6 @@ const Form = () => {
 							/>
 						</div>
 					</div>
-
 					<div className={styles.buttonGroup}>
 						<Button 
 							type='submit' 
@@ -118,9 +112,7 @@ const Form = () => {
 							Add Random User (API)
 						</Button>
 					</div>
-				
 				</form>
-
 			</Container>
 		</div>
 	)
